@@ -14,8 +14,11 @@ function App() {
     setTodo("")
     console.log(todos)
   }
-  const handleDelete = () => {
-    console.log('clicked2')
+  const handleDelete = (e, id) => {
+    let newTodos = todos.filter(item => {
+      return item.id !== id;
+    });
+    setTodos(newTodos)
   }
   const handleEdit = () => {
     console.log('clicked3')
@@ -44,6 +47,7 @@ function App() {
           </div>
           <h2 className='text-lg font-bold pt -4 '>Your Todos</h2>
           <div className="todos">
+            {todos.length === 0 && <div>No todos to display</div>}
             {todos.map(item=>{
 
             
@@ -54,7 +58,7 @@ function App() {
             </div>
             <div className="button">
               <button onClick={handleEdit} className="bg-violet-700 p-2 py-1 text-sm font-bold hover:bg-violet-900 text-white mx-6 rounded-md">Edit</button>
-              <button onClick={handleDelete} className="bg-violet-700 p-2 py-1 text-sm font-bold hover:bg-violet-900 text-white mx-6 rounded-md">Delete</button>
+              <button onClick={(e)=> handleDelete(e,item.id)} className="bg-violet-700 p-2 py-1 text-sm font-bold hover:bg-violet-900 text-white mx-6 rounded-md">Delete</button>
             </div>
           </div>
           })}
